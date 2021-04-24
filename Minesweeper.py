@@ -62,18 +62,18 @@ def game(m, n, mines):
             self.secrit[(self.secrit != -1) == (self.arr == -1)] = 1
             self.secrit[y][x] = -3  # Mines dead
             self.game = False
-            mb.showinfo('Lose', 'Ты проиграл ( ´･･)ﾉ(._.`)')
+            mb.showinfo('Lose', 'You loose ( ´･･)ﾉ(._.`)')
 
         def win(self):
             if sum(self.arr[self.secrit == 1] != -1) == self.n * self.m - self.mines:
                 self.smail = img['smail_win']
                 self.game = False
-                mb.showinfo('WIN', 'Ты выиграл (～￣▽￣)～')
+                mb.showinfo('WIN', 'You win (～￣▽￣)～')
 
-    pg.resource.path = ['./cnopki']
+    pg.resource.path = ['./resources']
     pg.resource.reindex()
 
-    img_list = list(os.walk('./cnopki'))[0][2]
+    img_list = list(os.walk('./resources'))[0][2]
     print(img_list)
     img = {i[:-4]: pg.resource.image(i) for i in img_list}
 
@@ -169,17 +169,17 @@ def game_me():
     try:
         m, n, mines = int(entry_m.get()), int(entry_n.get()), int(entry_mines.get())
         if m < 0 and n < 0:
-            mb.showerror('Error', 'Ввел слишком маленькие значения!\n Попробуй еще раз (✿◡‿◡)')
+            mb.showerror('Error', 'Entered too small values!\n Try again (✿◡‿◡)')
         elif m > 68 or n > 33:
             if not nastoychivost:
-                mb.showerror('Error', 'Ввел слишком большие значения <(＿　＿)>')
+                mb.showerror('Error', 'Entered too large values <(＿　＿)>')
                 nastoychivost = True
             else:
-                mb.showerror('Error', 'Ввел слишком большие значения ￣へ￣')
+                mb.showerror('Error', 'Entered too large values ￣へ￣')
         else:
             game(m, n, mines)
     except:
-        mb.showerror('Error', 'Ввел не Натуральные числа!')
+        mb.showerror('Error', 'I entered non-natural numbers!')
 
 
 def game_l():
@@ -188,19 +188,19 @@ def game_l():
 
 nastoychivost = False
 win = tk.Tk()
-tk.Label(text='Привет, Сапер!').grid(row=0, columnspan=4)
-tk.Label(text='Выбери уровен сложности').grid(row=1, columnspan=4)
+tk.Label(text='Hey, Minesweeper!').grid(row=0, columnspan=4)
+tk.Label(text='Choose a difficulty level').grid(row=1, columnspan=4)
 
-tk.Button(win, text='Лекго', width=10, command=game_e).grid(row=2, column=0)
-tk.Button(win, text='Нормально', width=10, command=game_m).grid(row=2, column=1)
-tk.Button(win, text='Сложно', width=10, command=game_h).grid(row=2, column=2)
-tk.Button(win, text='Чисто удача', width=10, command=game_l).grid(row=2, column=3)
+tk.Button(win, text='Easy', width=10, command=game_e).grid(row=2, column=0)
+tk.Button(win, text='Normal', width=10, command=game_m).grid(row=2, column=1)
+tk.Button(win, text='Hard', width=10, command=game_h).grid(row=2, column=2)
+tk.Button(win, text='Pure luck', width=10, command=game_l).grid(row=2, column=3)
 
-tk.Button(win, text='Свой', width=10, command=game_me).grid(row=3, column=3, rowspan=2)
+tk.Button(win, text='Customisable', width=10, command=game_me).grid(row=3, column=3, rowspan=2)
 
-tk.Label(text='Длина(68)').grid(row=3, column=0)
-tk.Label(text='Ширина(33)').grid(row=3, column=1)
-tk.Label(text='Кол-во мин').grid(row=3, column=2)
+tk.Label(text='length').grid(row=3, column=0)
+tk.Label(text='width').grid(row=3, column=1)
+tk.Label(text='number of mines').grid(row=3, column=2)
 
 entry_m = tk.Entry(win, width=10, font='callibri 10')
 entry_m.grid(row=4, column=0)
